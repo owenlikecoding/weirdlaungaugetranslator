@@ -1,25 +1,29 @@
+/* FILEPATH: /c:/Users/Owen Silberman real/Desktop/weirdlaungaugetranslator/static/styles.css */
+
+/* Reset default styles */
+body, h1, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set background color and font styles */
 body {
+    background-color: #f2f2f2;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+}
+
+/* Style the heading */
+h1 {
+    font-size: 24px;
+    font-weight: bold;
     color: #333;
-    text-align: center;
+    margin-bottom: 20px;
 }
 
-.container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-}
-
-input[type="text"], button {
-    margin: 10px 0;
-    padding: 10px;
-    width: 50%;
-}
-
-#translationResult {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #eaeaea;
-    border-radius: 5px;
+/* Style the paragraphs */
+p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 10px;
 }
