@@ -27,3 +27,14 @@ p {
     line-height: 1.5;
     margin-bottom: 10px;
 }
+
+button {
+    background-color: #333;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
