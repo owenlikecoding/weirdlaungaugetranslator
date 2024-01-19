@@ -87,7 +87,9 @@ def transform_grammar(tagged_words):
     case_transformations = {
         (wordnet.NOUN, 'nominative'): lambda word: word,
         (wordnet.NOUN, 'accusative'): lambda word: word + 'em',
-        # Add other case transformations as per your requirements
+        (wordnet.NOUN, 'instrumental'): lambda word: word + 'om',
+        (wordnet.NOUN, 'dative'): lambda word: word + 'u',
+        (wordnet.NOUN, 'genitive'): lambda word: word + 'a',
     }
 
     transformed_words = []
