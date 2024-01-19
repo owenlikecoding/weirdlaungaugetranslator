@@ -85,14 +85,14 @@ def transform_grammar(tagged_words):
     Modify word endings based on grammar and cases.
     """
     case_transformations = {
-        (wordnet.NOUN, 'nominative'): lambda word: word,
-        (wordnet.NOUN, 'accusative'): lambda word: word + 'em',
-        (wordnet.NOUN, 'instrumental'): lambda word: word + 'om',
-        (wordnet.NOUN, 'dative'): lambda word: word + 'u',
-        (wordnet.NOUN, 'genitive'): lambda word: word + 'a',
+        (wordnet.NOUN, 'nominative'): lambda word: word + 'ey',
+        (wordnet.NOUN, 'accusative'): lambda word: word + 'et',
+        (wordnet.NOUN, 'instrumental'): lambda word: word + 'ud',
+        (wordnet.NOUN, 'dative'): lambda word: word + 'oge',
+        (wordnet.NOUN, 'genitive'): lambda word: word + 'eis',
     }
 
-    transformed_words = []
+    transformed_words = [] 
     for word, (tag, case) in tagged_words:
         wntag = get_wordnet_pos(tag)
         transformation = case_transformations.get((wntag, case), lambda word: word)
