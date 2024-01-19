@@ -1,15 +1,19 @@
 /* FILEPATH: /c:/Users/Owen Silberman real/Desktop/weirdlaungaugetranslator/static/styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
-/* Reset default styles */
-* {
-/* Set background color and font styles */
 body {
     background-color: #f2f2f2;
+}
+
+/* Reset default styles */
+
+* {
     font-family: "Courier New", monospace;
 }
 
-}
-body, h1, p {
+body,
+h1,
+p {
     margin: 0;
     padding: 0;
 }
@@ -45,4 +49,3 @@ button {
     cursor: pointer;
     margin-bottom: 20px;
 }
-
