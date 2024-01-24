@@ -4,11 +4,20 @@ from nltk.tokenize import word_tokenize
 from nltk import pos_tag
 import nltk
 import pyperclip
+import ssl
+
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
 
 # Download necessary NLTK data
 nltk.download('averaged_perceptron_tagger')
 nltk.download('punkt')
 nltk.download('wordnet')
+nltk.download('omw-1.4')
 
 # Translation map
 translation_map = {
