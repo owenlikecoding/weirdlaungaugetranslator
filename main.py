@@ -63,12 +63,12 @@ def tag_parts_of_speech(words):
     """
     return pos_tag(words)
 
-def transform_word_order(words):
+def transform_word_order(tagged_words):
     """
     Transform the word order to Subject-Object-Verb and assign cases.
     """
     subjects, objects, verbs = [], [], []
-    for word, tag in words:
+    for word, tag in tagged_words:
         wntag = get_wordnet_pos(tag)
         if wntag == wordnet.NOUN:
             subjects.append((word, (tag, 'nominative')))
@@ -80,7 +80,7 @@ def transform_word_order(words):
 
     return subjects + objects + verbs
 
-def transform_grammar(words):
+def transform_grammar(tagged_words):
     """
     Modify word endings based on grammar and cases.
     """
@@ -93,7 +93,7 @@ def transform_grammar(words):
     }
 
     transformed_words = [] 
-    for word, (tag, case) in words:
+    for word, (tag, case) in tagged_words:
         wntag = get_wordnet_pos(tag)
         transformation = case_transformations.get((wntag, case), lambda word: word)
         transformed_words.append(transformation(word))
@@ -112,7 +112,7 @@ def translate_sentence(sentence, translation_map):
     words = process_input(sentence.lower())
     tagged_words = tag_parts_of_speech(words)
     sov_words = transform_word_order(tagged_words)
-    grammar_transformed_words = transform_grammar(tagged_words)
+    grammar_transformed_words = transform_grammar(sov_words)
     
     # Remove duplicates while preserving order
     seen = set()
