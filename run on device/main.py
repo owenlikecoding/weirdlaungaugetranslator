@@ -3,6 +3,7 @@ from nltk.corpus import wordnet
 from nltk.tokenize import word_tokenize
 from nltk import pos_tag
 import nltk
+import pyperclip
 
 # Download necessary NLTK data
 nltk.download('averaged_perceptron_tagger')
@@ -102,6 +103,10 @@ def translate_text():
     translated_sentence = translate_sentence(sentence, translation_map)
     result_label.config(text=translated_sentence)
 
+def copy_to_clipboard():
+    translated_text = result_label.cget("text")
+    pyperclip.copy(translated_text)
+
 # Tkinter GUI Setup
 window = tk.Tk()
 window.title("Sentence Translator")
@@ -110,10 +115,12 @@ entry_label = tk.Label(window, text="Enter sentence:")
 entry = tk.Entry(window, width=50)
 translate_button = tk.Button(window, text="Translate", command=translate_text)
 result_label = tk.Label(window, text="Translated sentence will appear here")
+copy_button = tk.Button(window, text="Copy", command=copy_to_clipboard)
 
 entry_label.pack()
 entry.pack()
 translate_button.pack()
 result_label.pack()
+copy_button.pack()
 
 window.mainloop()
