@@ -3,6 +3,7 @@ from nltk.corpus import wordnet
 from nltk.tokenize import word_tokenize
 from nltk import pos_tag
 import nltk
+import ssl
 
 # Ensure that NLTK can download datasets over HTTPS
 try:
