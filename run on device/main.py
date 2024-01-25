@@ -3,9 +3,8 @@ from nltk.corpus import wordnet
 from nltk.tokenize import word_tokenize
 from nltk import pos_tag
 import nltk
-import pyperclip
-import ssl
 
+# Ensure that NLTK can download datasets over HTTPS
 try:
     _create_unverified_https_context = ssl._create_unverified_context
 except AttributeError:
@@ -27,21 +26,21 @@ translation_map = {
     "iege": "ijech", "you": "tuj", "ade": "edun", "ave": "epvnor", "call": "rüpa",
     "erve": "etr", "een": "est", "pro": "uber", "ough": "enwi", "umb": "arpen",
     "ex": "alok", "ayed": "eton", "ank": "enkrek", "ole": "uchon", "cen": "sojr",
-    "ange": "anko", "have": "haket", "if": "wun", "am": "iv", "ing": "agno",
-    "in": "eun", "tab": "vanno", "ere": "elta", "ear": "egla", "tw": "tsj",
-    "ium": "oz", "ibe": "ijen", "ace": "apts", "arm": "epa", "rce": "dzn",
+    "ange": "anko", "have": "haket", "if": "wun", "am": "iv", "ing": "ande",
+    "in": "eun", "tab": "vanno", "ere": "ene", "ear": "egla", "tw": "tsj",
+    "ium": "oz", "ibe": "ijen", "ace": "apts", "arm": "era", "rce": "dzn",
     "rse": "id", "igh": "ern", "ike": "ënk", "ous": "il", "ard": "enak",
     "ude": "euëg", "uf": "eb", "of": "oven", "from": "ven", "or": "urr",
     "ame": "aure", "oul": "auk", "nce": "njo", "ine": "ott", "old": "aul",
     "ble": "prë", "ght": "rur", "ome": "eam", "ive": "ok", "ov": "oë",
-    "ke": "get", "ple": "mounn", "has": "hald", "w": "v", "alk": "ecken",
+    "ke": "get", "ple": "mounn", "has": "hald", "wa": "veu", "alk": "ecken",
     "irl": "inne", "ny": "ia", "py": "ia", "ty": "ia", "sy": "ia",
-    "t": "dt", "au": "ä", "u": "ü", "ai": "ey", "oo": "ou",
-    "ss": "scë", "Deo": "craig", "ot": "ar", "ea": "ahn", "ote": "eyt",
-    "oat": "uet", "sh": "sy", "af": "ap", "is": "est", "on": "ana",
+    "et": "edt", "au": "ä", "u": "ü", "ai": "ey", "oo": "ou",
+    "ss": "scë", "Deo": "craig", "ot": "ar", "rea": "renu", "ote": "eyt",
+    "oat": "uet", "sh": "sy", "af": "ap", "is": "ens", "on": "ana",
     "ei": "eyu", "ough": "ëaw", "th": "dëh", "ll": "lsker", "ial": "ek",
     "ly": "lik", "er": "arn", "can": "cou", "ph": "uin", "end": "idel",
-    "ack": "agch", "so": "toa", "uch": "itt", "ick": "aën", "ic": "aësch", "ang": "erla", "co": "csae", "act": "apel", "acdt": "apel", "and": "oket"
+    "ack": "agch", "sou": "si", "clean": "soor", "uch": "itt", "ick": "aën", "ic": "aësch", "ang": "erla", "co": "csae", "act": "apel", "acdt": "apel", "and": "oket", "are": "sud", "does": "enne", "peak": "prog", "its": "esk", "know": "weute", "little": "clien"
 }
 
 def get_wordnet_pos(treebank_tag):
@@ -62,74 +61,43 @@ def process_input(sentence):
 def tag_parts_of_speech(words):
     return pos_tag(words)
 
-def transform_word_order(tagged_words):
-    subjects, objects, verbs = [], [], []
+def transform_grammar(tagged_words):
+    transformed = []
     for word, tag in tagged_words:
         wntag = get_wordnet_pos(tag)
-        if wntag == wordnet.NOUN:
-            subjects.append((word, (tag, 'nominative')))
-            objects.append((word, (tag, 'accusative')))
-        elif wntag == wordnet.VERB:
-            verbs.append((word, (tag, 'none')))
-        else:
-            objects.append((word, (tag, 'none')))
-    return subjects + objects + verbs
+        transformed_word = translation_map.get(word, word) # Default to original word if not in map
+        transformed.append(transformed_word)
+    return transformed
 
-def transform_grammar(tagged_words):
-    case_transformations = {
-        (wordnet.NOUN, 'nominative'): lambda word: word + 'ey',
-        (wordnet.NOUN, 'accusative'): lambda word: word + 'et',
-        (wordnet.NOUN, 'instrumental'): lambda word: word + 'ud',
-        (wordnet.NOUN, 'dative'): lambda word: word + 'oge',
-        (wordnet.NOUN, 'genitive'): lambda word: word + 'eis',
-    }
-    transformed_words = [] 
-    for word, (tag, case) in tagged_words:
-        wntag = get_wordnet_pos(tag)
-        transformation = case_transformations.get((wntag, case), lambda word: word)
-        transformed_words.append(transformation(word))
-    return transformed_words
-
-def translate_characters(sentence, translation_map):
-    for key in translation_map:
-        sentence = sentence.replace(key, translation_map[key])
-    return sentence
-
-def translate_sentence(sentence, translation_map):
-    words = process_input(sentence.lower())
+def translate_sentence(sentence):
+    words = process_input(sentence)
     tagged_words = tag_parts_of_speech(words)
-    sov_words = transform_word_order(tagged_words)
-    grammar_transformed_words = transform_grammar(sov_words)
-    
-    seen = set()
-    unique_words = [x for x in grammar_transformed_words if not (x in seen or seen.add(x))]
-    
-    transformed_sentence = ' '.join(unique_words)
-    return translate_characters(transformed_sentence, translation_map)
+    transformed_words = transform_grammar(tagged_words)
+    return ' '.join(transformed_words)
 
-def translate_text():
-    sentence = entry.get()
-    translated_sentence = translate_sentence(sentence, translation_map)
-    result_label.config(text=translated_sentence)
+# GUI setup
+root = tk.Tk()
+root.title("Sentence Translator")
 
-def copy_to_clipboard():
-    translated_text = result_label.cget("text")
-    pyperclip.copy(translated_text)
+input_label = tk.Label(root, text="Enter Sentence:")
+input_label.pack()
 
-# Tkinter GUI Setup
-window = tk.Tk()
-window.title("Sentence Translator")
+input_text = tk.Entry(root, width=50)
+input_text.pack()
 
-entry_label = tk.Label(window, text="Enter sentence:")
-entry = tk.Entry(window, width=50)
-translate_button = tk.Button(window, text="Translate", command=translate_text)
-result_label = tk.Label(window, text="Translated sentence will appear here")
-copy_button = tk.Button(window, text="Copy", command=copy_to_clipboard)
+output_label = tk.Label(root, text="Translated Sentence:")
+output_label.pack()
 
-entry_label.pack()
-entry.pack()
+output_text = tk.Entry(root, width=50)
+output_text.pack()
+
+def on_translate():
+    input_sentence = input_text.get()
+    translated_sentence = translate_sentence(input_sentence)
+    output_text.delete(0, tk.END)
+    output_text.insert(0, translated_sentence)
+
+translate_button = tk.Button(root, text="Translate", command=on_translate)
 translate_button.pack()
-result_label.pack()
-copy_button.pack()
 
-window.mainloop()
+root.mainloop()
