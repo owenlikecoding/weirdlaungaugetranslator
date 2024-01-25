@@ -21,27 +21,7 @@ nltk.download('omw-1.4')
 
 # Translation map
 translation_map = {
-    "eer": "epar", "ock": "eyn", "wer": "pvun", "eed": "ausert", "elp": "erss",
-    "elf": "ackau", "chee": "kali", "age": "aulik", "aft": "afns", "ied": "öd",
-    "ile": "ölun", "ast": "airt", "ound": "urnt", "ure": "eton", "eige": "ijech",
-    "iege": "ijech", "you": "tuj", "ade": "edun", "ave": "epvnor", "call": "rüpa",
-    "erve": "etr", "een": "est", "pro": "uber", "ough": "enwi", "umb": "arpen",
-    "ex": "alok", "ayed": "eton", "ank": "enkrek", "ole": "uchon", "cen": "sojr",
-    "ange": "anko", "have": "haket", "if": "wun", "am": "iv", "ing": "agno",
-    "in": "eun", "tab": "vanno", "ere": "elta", "ear": "egla", "tw": "tsj",
-    "ium": "oz", "ibe": "ijen", "ace": "apts", "arm": "epa", "rce": "dzn",
-    "rse": "id", "igh": "ern", "ike": "ënk", "ous": "il", "ard": "enak",
-    "ude": "euëg", "uf": "eb", "of": "oven", "from": "ven", "or": "urr",
-    "ame": "aure", "oul": "auk", "nce": "njo", "ine": "ott", "old": "aul",
-    "ble": "prë", "ght": "rur", "ome": "eam", "ive": "ok", "ov": "oë",
-    "ke": "get", "ple": "mounn", "has": "hald", "w": "v", "alk": "ecken",
-    "irl": "inne", "ny": "ia", "py": "ia", "ty": "ia", "sy": "ia",
-    "t": "dt", "au": "ä", "u": "ü", "ai": "ey", "oo": "ou",
-    "ss": "scë", "Deo": "craig", "ot": "ar", "ea": "ahn", "ote": "eyt",
-    "oat": "uet", "sh": "sy", "af": "ap", "is": "est", "on": "ana",
-    "ei": "eyu", "ough": "ëaw", "th": "dëh", "ll": "lsker", "ial": "ek",
-    "ly": "lik", "er": "arn", "can": "cou", "ph": "uin", "end": "idel",
-    "ack": "agch", "so": "toa", "uch": "itt", "ick": "aën", "ic": "aësch", "ang": "erla", "co": "csae", "act": "apel", "acdt": "apel", "and": "oket"
+    "eer": "epar", "ock": "eyn", "wer": "pvun", "eed": "ausert", "elp": "erss", "elf": "ackau", "chee": "kali", "age": "aulik", "aft": "afns", "ied": "öd",  "ile": "ölun", "ast": "airt", "ound": "urnt", "ure": "eton", "eige": "ijech",  "iege": "ijech", "you": "tuj", "ade": "edun", "ave": "epvnor", "call": "rüpa", "erve": "etr", "een": "est", "pro": "uber", "ough": "enwi", "umb": "arpen", "ex": "alok", "ayed": "eton", "ank": "enkrek", "ole": "uchon", "cen": "sojr","ange": "anko", "have": "haket", "if": "wun", "am": "iv", "ing": "agno","in": "eun", "tab": "vanno", "ere": "elta", "ear": "egla", "tw": "tsj", "ium": "oz", "ibe": "ijen", "ace": "apts", "arm": "epa", "rce": "dzn","rse": "id", "igh": "ern", "ike": "ënk", "ous": "il", "ard": "enak","ude": "euëg", "uf": "eb", "of": "oven", "from": "ven", "or": "urr","ame": "aure", "oul": "auk", "nce": "njo", "ine": "ott", "old": "aul","ble": "prë", "ght": "rur", "ome": "eam", "ive": "ok", "ov": "oë","ke": "get", "ple": "mounn", "has": "hald", "w": "v", "alk": "ecken","irl": "inne", "ny": "ia", "py": "ia", "ty": "ia", "sy": "ia","t": "dt", "au": "ä", "u": "ü", "ai": "ey", "oo": "ou","ss": "scë", "Deo": "craig", "ot": "ar", "ea": "ahn", "ote": "eyt","oat": "uet", "sh": "sy", "af": "ap", "is": "est", "on": "ana","ei": "eyu", "ough": "ëaw", "th": "dëh", "ll": "lsker", "ial": "ek","ly": "lik", "er": "arn", "can": "cou", "ph": "uin", "end": "idel","ack": "agch", "so": "toa", "uch": "itt", "ick": "aën", "ic": "aësch", "ang": "erla", "co": "csae", "act": "apel", "acdt": "apel", "and": "oket"
 }
 
 def get_wordnet_pos(treebank_tag):
