@@ -57,18 +57,18 @@ def transform_word_order(tagged_words):
 
 def transform_grammar(tagged_words):
     case_transformations = {
-        (wordnet.NOUN, 'nominative'): lambda word: word + 'ey',
-        (wordnet.NOUN, 'accusative'): lambda word: word + 'et',
-        (wordnet.NOUN, 'instrumental'): lambda word: word + 'ud',
-        (wordnet.NOUN, 'dative'): lambda word: word + 'oge',
-        (wordnet.NOUN, 'genitive'): lambda word: word + 'eis',
+        ('NN', 'nominative'): lambda word: word + 'ey',
+        ('NN', 'accusative'): lambda word: word + 'et',
+        ('NN', 'instrumental'): lambda word: word + 'ud',
+        ('NN', 'dative'): lambda word: word + 'oge',
+        ('NN', 'genitive'): lambda word: word + 'eis',
     }
     transformed_words = [] 
     for word, (tag, case) in tagged_words:
-        wntag = get_wordnet_pos(tag)
-        transformation = case_transformations.get((wntag, case), lambda word: word)
+        transformation = case_transformations.get((tag, case), lambda word: word)
         transformed_words.append(transformation(word))
     return transformed_words
+
 
 def translate_characters(sentence, translation_map):
     for key in translation_map:
