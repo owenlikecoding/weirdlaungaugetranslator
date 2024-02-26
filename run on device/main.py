@@ -4,24 +4,35 @@ from nltk.tokenize import word_tokenize
 from nltk import pos_tag
 import nltk
 import pyperclip
-import ssl
-
-try:
-    _create_unverified_https_context = ssl._create_unverified_context
-except AttributeError:
-    pass
-else:
-    ssl._create_default_https_context = _create_unverified_https_context
 
 # Download necessary NLTK data
 nltk.download('averaged_perceptron_tagger')
 nltk.download('punkt')
 nltk.download('wordnet')
-nltk.download('omw-1.4')
 
 # Translation map
 translation_map = {
-    "eer": "epar", "ock": "eyn", "wer": "pvun", "eed": "ausert", "elp": "erss", "elf": "ackau", "chee": "kali", "age": "aulik", "aft": "afns", "ied": "öd",  "ile": "ölun", "ast": "airt", "ound": "urnt", "ure": "eton", "eige": "ijech",  "iege": "ijech", "you": "tuj", "ade": "edun", "ave": "epvnor", "call": "rüpa", "erve": "etr", "een": "est", "pro": "uber", "ough": "enwi", "umb": "arpen", "ex": "alok", "ayed": "eton", "ank": "enkrek", "ole": "uchon", "cen": "sojr","ange": "anko", "have": "haket", "if": "wun", "am": "iv", "ing": "agno","in": "eun", "tab": "vanno", "ere": "elta", "ear": "egla", "tw": "tsj", "ium": "oz", "ibe": "ijen", "ace": "apts", "arm": "epa", "rce": "dzn","rse": "id", "igh": "ern", "ike": "ënk", "ous": "il", "ard": "enak","ude": "euëg", "uf": "eb", "of": "oven", "from": "ven", "or": "urr","ame": "aure", "oul": "auk", "nce": "njo", "ine": "ott", "old": "aul","ble": "prë", "ght": "rur", "ome": "eam", "ive": "ok", "ov": "oë","ke": "get", "ple": "mounn", "has": "hald", "w": "v", "alk": "ecken","irl": "inne", "ny": "ia", "py": "ia", "ty": "ia", "sy": "ia","t": "dt", "au": "ä", "u": "ü", "ai": "ey", "oo": "ou","ss": "scë", "Deo": "craig", "ot": "ar", "ea": "ahn", "ote": "eyt","oat": "uet", "sh": "sy", "af": "ap", "is": "est", "on": "ana","ei": "eyu", "ough": "ëaw", "th": "dëh", "ll": "lsker", "ial": "ek","ly": "lik", "er": "arn", "can": "cou", "ph": "uin", "end": "idel","ack": "agch", "so": "toa", "uch": "itt", "ick": "aën", "ic": "aësch", "ang": "erla", "co": "csae", "act": "apel", "acdt": "apel", "and": "oket"
+    "eer": "epar", "hello": "Helskau", " i ": " iy ", " ire ": " iy ", " pie ": " tret ", "remember": "betäk", "ouse": "äs", " my ": " mär ", " me ": " mä ", "had": "behaln", "'s": " thrä", "sing": "zëng", "sang": "zëng", "play": "späl",  "soldier": "saldattar", "war ": "krag ", "battle": "siyge", "big": "grüt", "just": "nähr", "est": "wä", "by ": "nëben ", "with ": "mëdst ", "people": "vülka", "yes": "jah", "we ": "vir ", "down": "änder", "under": "änder", "money": "gäller", "to ": "tejil ", "own": "unt", "did": "enod", "stop": "held", "what": "wath", "die": "starur", "death": "starn", "dead": "staren",  "low": "lä", "art": "arte", "ock": "eyn", "see": "sern", "were": "voë", "when": "nean", "who": "hun", "why": "vöre", "eed": "ause", "elp": "erss",
+    "elf": "ackär", "chee": "kali", "ance": "anz", "age": "aulik", "aft": "afns", "ied": "öd",
+    "ile": "ölun", "ast": "irst", "ound": "urnt", "ure": "erun", "eige": "ijech",
+    "iege": "ijech", "you": "tuj", "ade": "edun", "ave": "epvnor", "call": "rüpa",
+    "erve": "etr", "een": "est", "pro": "de", "ough": "enwi", "umb": "arpen",
+    "ex": "aloc", "ayed": "eton", "ank": "enkrek", "ole": "ucon", "cen": "sojr",
+    "ange": "anko", "have": "haket", "if": "wun", "am": "iv", "ing": "ande",
+    "in": "eun", "tab": "vanno", "ere": "ene", "ear": "oö", "tw": "tsj",
+    "ium": "oz", "ibe": "ijen", "ace": "apts", "arm": "era", "rce": "dzn",
+    "rse": "id", "igh": "ern", "ike": "ënk", "ous": "il", "ard": "enak",
+    "ude": "euëg", "uf": "eb", "of": "oven", "from": "ven", "or": "urr",
+    "ame": "aure", "oul": "auk", "nce": "nell", "ine": "ott", "old": "aul",
+    "ble": "prë", "ght": "rur", "ome": "eam", "ive": "ok", "ov": "oë",
+    "ke": "get", "ple": "vä", "has": "hald", "wa": "veu", "alk": "eckan",
+    "irl": "inne", "ny": "ia", "py": "ia", "ty": "ia", "country": "lënde", "nation": "vülgelönde", "sy": "ia",
+    "et": "edt", "au": "ä", "u": "ü", "air": "läft", "oo": "ou",
+    "ss": "scë", "craig": "DEYO", "ot": "aär", "rea": "renu", "ote": "eyt",
+    "oat": "uet", "sh": "sc", "af": "ap", "is": "ens", "on": "ana",
+    "ei": "eyu", "ough": "ëaw", "th": "dëh", "ll": "lsker", "ial": "ek",
+    "ly": "lik", "can": "cö", "ph": "fo", "end": "idel",
+    "ack": "agch", "sou": "si", "clean": "soor", "uch": "itt", "ick": "aën", "ic": "aësch", "ang": "erla", "cow": "cuu", "act": "apel", "acdt": "apel", "and ": "oket ", "are ": "sud ", "does": "enne", "peak": "prog", "its": "esk", "know": "weute", "little": "clien", "how": "weag", "new": "naä",
 }
 
 def get_wordnet_pos(treebank_tag):
@@ -57,15 +68,17 @@ def transform_word_order(tagged_words):
 
 def transform_grammar(tagged_words):
     case_transformations = {
-        ('NN', 'nominative'): lambda word: word + 'ey',
-        ('NN', 'accusative'): lambda word: word + 'et',
-        ('NN', 'instrumental'): lambda word: word + 'ud',
-        ('NN', 'dative'): lambda word: word + 'oge',
-        ('NN', 'genitive'): lambda word: word + 'eis',
+        (wordnet.NOUN, 'nominative'): lambda word: word + 'ers',
+        (wordnet.NOUN, 'accusative'): lambda word: word + 're',
+        (wordnet.NOUN, 'instrumental'): lambda word: word + 'ud',
+        (wordnet.NOUN, 'dative'): lambda word: word + 'oge',
+        (wordnet.NOUN, 'genitive'): lambda word: word + 'eis',
+        (wordnet.VERB, 'none'): lambda word: word + 'e',
     }
-    transformed_words = [] 
+    transformed_words = []   
     for word, (tag, case) in tagged_words:
-        transformation = case_transformations.get((tag, case), lambda word: word)
+        wntag = get_wordnet_pos(tag)
+        transformation = case_transformations.get((wntag, case), lambda word: word)
         transformed_words.append(transformation(word))
     return transformed_words
 
